@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Alert, Card } from "react-bootstrap";
-import { login } from "../../api";
+import { login } from "../../api/login";
 
 function Login({ onLoginSuccessful }) {
   const [email, setEmail] = useState("");

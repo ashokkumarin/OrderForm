@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./components/login";
-import SubmitOrder from "./components/orderform";
-import OrderConfirmation from "./components/orderconfirmation";
+import SubmitOrder from "./components/submitorder";
+import ConfirmOrder from "./components/confirmorder";
 
 function AppWrapper() {
   return (
@@ -23,7 +23,7 @@ function App() {
 
   const onLoginSuccessful = () => {
     setIsUserSignedIn(true);
-    navigate("/orderform");
+    navigate("/orders");
   };
 
   const onLogout = () => {
@@ -33,13 +33,11 @@ function App() {
     navigate("/");
   };
 
-  console.log("Test print");
-
   return (
     <Routes>
       <Route path="/" element={<Login onLoginSuccessful={onLoginSuccessful} />} />
-      <Route path="/orderform" element={<SubmitOrder onLogout={onLogout} />} />
-      <Route path="/orderconfirmation" element={<OrderConfirmation />} />
+      <Route path="/orders" element={<SubmitOrder onLogout={onLogout} />} />
+      <Route path="/confirmorder" element={<ConfirmOrder />} />
     </Routes>
   );
 }

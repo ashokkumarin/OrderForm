@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert, Card } from "react-bootstrap";
+import { Container, Card, CardContent, Typography, TextField, Button, Alert } from '@mui/material';
 import { login } from "../../api/login";
 
 function Login({ onLoginSuccessful }) {
@@ -26,44 +26,41 @@ function Login({ onLoginSuccessful }) {
   };
 
   return (
-    <Container>
-      <Card className="mt-5">
-        <Card.Header as="h1">Login</Card.Header>
-        <Card.Body>
-          <Form className="w-100" onSubmit={onSubmit}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                onChange={onEmailChange}
-                value={email}
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                onChange={onPasswordChange}
-                value={password}
-              />
-            </Form.Group>
+    <Container maxWidth="sm">
+      <Card sx={{ mt: 5 }}>
+        <CardContent>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Login
+          </Typography>
+          <form onSubmit={onSubmit}>
+            <TextField
+              fullWidth
+              label="Email address"
+              type="email"
+              margin="normal"
+              value={email}
+              onChange={onEmailChange}
+              placeholder="Enter email"
+            />
+            <TextField
+              fullWidth
+              label="Password"
+              type="password"
+              margin="normal"
+              value={password}
+              onChange={onPasswordChange}
+              placeholder="Password"
+            />
             {hasError && (
-              <Alert variant={"danger"}>
-                The email address and password you entered don't match any
-                account. Please try again.
+              <Alert severity="error" sx={{ mt: 2 }}>
+                The email address and password you entered don't match any account. Please try again.
               </Alert>
             )}
-            <Button variant="primary" type="submit">
+            <Button variant="contained" color="primary" type="submit" sx={{ mt: 3 }}>
               Submit
             </Button>
-          </Form>
-        </Card.Body>
+          </form>
+        </CardContent>
       </Card>
     </Container>
   );

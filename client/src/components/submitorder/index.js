@@ -2,13 +2,22 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Alert } from "react-bootstrap";
+import {
+  Button,
+  TextField,
+  Grid,
+  Alert,
+  Container,
+  Typography,
+  AppBar,
+  Toolbar
+} from "@mui/material";
 import { SubmitOrders } from "../../api/orders";
 
 function SubmitOrder({ onLogout }) {
   let navigate = useNavigate();
-
-  const initialOrderState = Array(10).fill(0); // Initialize order quantities for 10 items as 0
+  const foodItems = ["Samosa", "Pakoda" , "Bonda", "Murukku", "Thattai", "Vadai", "Upma", "Pesarattu", "Bajji", "Ribbon Pakoda" ];
+  const initialOrderState = Array(10).fill(0);
   const [orders, setOrders] = useState(initialOrderState);
   const [hasError, setHasError] = useState(false);
 
@@ -24,43 +33,71 @@ function SubmitOrder({ onLogout }) {
 
     if (!orderResults) setHasError(true);
     else {
-      localStorage.setItem("orders", orders);
+      localStorage.setItem("orders", JSON.stringify(orders));
       navigate("/confirmorder");
     }
   };
 
   return (
-    <div className="container">
-      <div className="mt-2 mb-2 justify-content-end" noGutters>
-        <Button variant="outline-danger" onClick={onLogout}>
-          Log out
-        </Button>
-      </div>
-      <form onSubmit={onSubmit}>
-        {orders.map((order, index) => (
-          <div key={index}>
-            <label>Item {index + 1}: </label>
-            <input
-              type="number"
-              value={order}
-              onChange={(e) =>
-                handleQuantityChange(index, parseInt(e.target.value))
-              }
-              min="0"
-            />
-          </div>
-        ))}
-        {hasError && (
-          <p>
-            <Alert variant={"danger"}>
-              Order quantity of Item#1 should be 1234. Please try again.
-            </Alert>
-          </p>
-        )}
+    <Container>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            My Kitchen Order Form
+          </Typography>
+          <Button color="inherit" onClick={onLogout}>
+            Log out
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Grid container spacing={2} direction="column">
+        <Grid item>
+        <br /><br />
+        </Grid>
+        <form onSubmit={onSubmit}>
+          {orders.map((order, index) => (
+            <Grid container spacing={2} key={index} alignItems="center">
+              <Grid item xs={1}></Grid>
+              <Grid item xs={8}>
+                <Typography variant="body1">{ foodItems[index + 1] }</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <TextField
+                  type="number"
+                  value={order}
+                  onChange={(e) =>
+                    handleQuantityChange(index, parseInt(e.target.value, 10))
+                  }
+                  variant="outlined"
+                  fullWidth
+                  InputProps={{
+                    inputProps: {
+                      min: 0
+                    },
+                  }}
+                />
+              </Grid>
+            </Grid>
+          ))}
 
-        <button type="submit">Submit Order</button>
-      </form>
-    </div>
+          <br />
+          {hasError && (
+            <Grid item>
+              <Alert severity="error">
+                Order quantity of Item#1 should be 1234. Please try again.
+              </Alert>
+            </Grid>
+          )}
+
+          <br /><br />
+          <Grid container justifyContent="center">
+            <Button type="submit" variant="contained" color="primary">
+              Order my Food
+            </Button>
+          </Grid>
+        </form>
+      </Grid>
+    </Container>
   );
 }
 

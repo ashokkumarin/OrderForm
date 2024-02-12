@@ -1,4 +1,5 @@
 export async function login({ email, password }) {
+  console.log("inside login function");
     return await fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
@@ -16,10 +17,11 @@ export async function login({ email, password }) {
         console.log(err);
       });
   }
-  
-  export async function searchArtworks({ keyword }) {
-    return await fetch(`/api/homepage/getArtworks/${keyword}`, {
-      method: "GET",
+
+  export async function submitOrder({ orders }) {
+    return await fetch("/api/orderform/submitOrder", {
+      method: "POST",
+      body: JSON.stringify({ orders }),
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {

@@ -13,6 +13,7 @@ function Login({ onLoginSuccessful }) {
   const onSubmit = async (event) => {
     event.preventDefault();
     setHasError(false);
+
     const loginResult = await login({ email, password });
     if (!loginResult) setHasError(true);
     else {

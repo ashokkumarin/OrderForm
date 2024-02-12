@@ -29,37 +29,19 @@ function Login({ onLoginSuccessful }) {
     <Container maxWidth="sm">
       <Card sx={{ mt: 5 }}>
         <CardContent>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Login
-          </Typography>
+          <Typography variant="h4" component="h1" gutterBottom> Login </Typography>
+
           <form onSubmit={onSubmit}>
-            <TextField
-              fullWidth
-              label="Email address"
-              type="email"
-              margin="normal"
-              value={email}
-              onChange={onEmailChange}
-              placeholder="Enter email"
-            />
-            <TextField
-              fullWidth
-              label="Password"
-              type="password"
-              margin="normal"
-              value={password}
-              onChange={onPasswordChange}
-              placeholder="Password"
-            />
+            <TextField fullWidth label="Email address" type="email"  margin="normal" value={email} onChange={onEmailChange} placeholder="Enter email" />
+            <TextField fullWidth label="Password" type="password" margin="normal" value={password} onChange={onPasswordChange} placeholder="Password" />
             {hasError && (
               <Alert severity="error" sx={{ mt: 2 }}>
                 The email address and password you entered don't match any account. Please try again.
               </Alert>
             )}
-            <Button variant="contained" color="primary" type="submit" sx={{ mt: 3 }}>
-              Submit
-            </Button>
+            <Button variant="contained" color="primary" type="submit" sx={{ mt: 3 }}> Login </Button>
           </form>
+
         </CardContent>
       </Card>
     </Container>

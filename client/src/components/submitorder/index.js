@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { SubmitOrders } from "../../api/orders";
 
-function SubmitOrder({ onLogout }) {
+function SubmitOrder() {
   let navigate = useNavigate();
   const foodItems = ["Samosa", "Pakoda" , "Bonda", "Murukku", "Thattai", "Vadai", "Upma", "Pesarattu", "Bajji", "Ribbon Pakoda" ];
   const initialOrderState = Array(10).fill(0);
@@ -40,16 +40,6 @@ function SubmitOrder({ onLogout }) {
 
   return (
     <Container>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            My Kitchen Order Form
-          </Typography>
-          <Button color="inherit" onClick={onLogout}>
-            Log out
-          </Button>
-        </Toolbar>
-      </AppBar>
       <Grid container spacing={2} direction="column">
         <Grid item>
         <br /><br />

@@ -1,27 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Container, Typography, Box } from "@mui/material";
 
-function ConfirmOrder({ onLogout }) {
-  //const orderDetails = JSON.parse(localStorage.getItem("orders"));
-
-  //console.log(orderDetails);
-
-  let navigate = useNavigate();
-
-  const handleBackToOrder = () => {
-    navigate('/orders'); // Adjust the path as needed for your application
-  };    
-
+function ConfirmOrder() {
   return (
-    <div>
-      <h2>Order Confirmed!</h2>
-      <div>
-        <p>Thank you for your order. Order successfully received.</p>
-        
-
-      </div>
-
-      <button onClick={handleBackToOrder}>Back to Order Page</button>
-    </div>
+    <Container>
+      <br /><br />
+      <Typography variant="h4" gutterBottom>
+        Order Confirmed!
+      </Typography>
+      <Box>
+        <Typography variant="body1">
+          Thank you for your order. Order successfully received.
+        </Typography>
+      </Box>
+    </Container>
   );
 }
 
